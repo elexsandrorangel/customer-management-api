@@ -10,7 +10,7 @@ namespace CustomerManagement.Business
     {
         public CustomerBusiness(ICustomerRepository repository, 
             IMapper mapper, 
-            ILogger logger) 
+            ILogger<CustomerBusiness> logger) 
             : base(repository, mapper, logger)
         {
         }

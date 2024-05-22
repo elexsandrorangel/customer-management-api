@@ -99,43 +99,6 @@ namespace CustomerManagement.Repository
         /// If more than one object is found or if zero are found, null is returned</returns>
         Task<TEntity?> GetSingleOrDefaultAsync(Expression<Func<TEntity, bool>> match, bool track = false);
 
-        /// <summary>
-        /// Gets a collection of all active objects in the database
-        /// </summary>
-        /// <remarks>Asynchronous</remarks>
-        /// <returns>An IEnumerable of every active object in the database</returns>
-        Task<IEnumerable<TEntity>> GetActiveAsync(int page = 0, int qty = int.MaxValue, bool track = false);
-
-        /// <summary>
-        /// Returns a single active object with a primary key of the provided id
-        /// </summary>
-        /// <remarks>Asynchronous</remarks>
-        /// <param name="id">The primary key of the object to fetch</param>
-        /// <returns>A single object with the provided primary key or null</returns>
-        Task<TEntity?> GetActiveAsync(Guid id, bool track = false);
-
-        /// <summary>
-        /// Gets a collection of all inactive objects in the database
-        /// </summary>
-        /// <remarks>Asynchronous</remarks>
-        /// <returns>An IEnumerable of every object in the database</returns>
-        Task<IEnumerable<TEntity>> GetInactiveAsync(bool track = false);
-
-        /// <summary>
-        /// Gets a collection of all not deleted objects in the database
-        /// </summary>
-        /// <remarks>Asynchronous</remarks>
-        /// <returns>An IEnumerable of every not deleted object in the database</returns>
-        Task<IEnumerable<TEntity>> GetNotDeletedAsync(int page = 0, int qty = int.MaxValue, bool track = false);
-
-        /// <summary>
-        /// Returns a single not deleted object with a primary key of the provided id
-        /// </summary>
-        /// <remarks>Asynchronous</remarks>
-        /// <param name="id">The primary key of the object to fetch</param>
-        /// <returns>A single object with the provided primary key or null</returns>
-        Task<TEntity?> GetNotDeletedAsync(Guid id, bool track = false);
-
         #endregion Get
 
         #region Save

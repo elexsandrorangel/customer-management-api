@@ -72,8 +72,6 @@ namespace CustomerManagement.Business
         public virtual async Task<TModel> AddAsync(TModel t)
         {
             ValidateInsert(t);
-
-            t.Active = true;
             return ModelFromEntity(await Repository.AddAsync(EntityFromModel(t)))!;
         }
 
@@ -100,14 +98,20 @@ namespace CustomerManagement.Business
 
         public virtual async Task DeleteAsync(Guid id)
         {
-            await InactivateAsync(id, null);
+            var data = await GetAsync(id, true);
+
+            if (data == null)
+            {
+                throw new AppNotFoundException();
+            }
+            await DeleteAsync(data);
         }
 
         public virtual async Task DeleteAsync(TModel t)
         {
             await ValidateDeleteAsync(t);
 
-            await InactivateAsync(t.Id, null);
+            await Repository.DeleteAsync(t.Id);
         }
 
         #endregion Delete
@@ -124,12 +128,12 @@ namespace CustomerManagement.Business
             {
                 page = 0;
             }
-            return ModelFromEntity(await Repository.GetNotDeletedAsync(page, qty, false))!;
+            return ModelFromEntity(await Repository.GetAsync(page, qty, false))!;
         }
 
         public virtual async Task<TModel?> GetAsync(Guid id, bool track = false)
         {
-            return ModelFromEntity(await Repository.GetNotDeletedAsync(id, track));
+            return ModelFromEntity(await Repository.GetAsync(id, track));
         }
 
         #endregion Get
@@ -154,21 +158,6 @@ namespace CustomerManagement.Business
 
         #region Update
 
-        public virtual async Task<bool> InactivateAsync(Guid id, int? inactivatedBy)
-        {
-            TModel? obj = await GetAsync(id, false);
-            if (obj == null)
-            {
-                throw new AppNotFoundException();
-            }
-
-            await ValidateDeleteAsync(obj);
-
-            obj.IsDeleted = true;
-            await Repository.UpdateAsync(EntityFromModel(obj));
-            return true;
-        }
-
         public virtual async Task<TModel> UpdateAsync(TModel updated)
         {
             await ValidateUpdateAsync(updated);
@@ -180,7 +169,6 @@ namespace CustomerManagement.Business
                 throw new AppNotFoundException();
             }
 
-            updated.TenantId = record.TenantId;
             updated.CreatedAt = record.CreatedAt;
 
             var data = await Repository.UpdateAsync(EntityFromModel(updated));
@@ -199,7 +187,6 @@ namespace CustomerManagement.Business
             }
 
             updated.Id = key;
-            updated.TenantId = record.TenantId;
             updated.CreatedAt = record.CreatedAt;
 
             var data = await Repository.UpdateAsync(EntityFromModel(updated), key);

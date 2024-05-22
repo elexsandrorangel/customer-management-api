@@ -120,31 +120,6 @@ namespace CustomerManagement.Repository
             return await Context.Set<T>().AsNoTracking().FirstOrDefaultAsync(match);
         }
 
-        public virtual async Task<IEnumerable<T>> GetActiveAsync(int page = 0, int qty = int.MaxValue, bool track = false)
-        {
-            return await GetAsync(a => a.Active, page, qty, track);
-        }
-
-        public virtual async Task<T?> GetActiveAsync(Guid id, bool track = false)
-        {
-            return await GetSingleOrDefaultAsync(a => a.Id == id && a.Active, track);
-        }
-
-        public virtual async Task<IEnumerable<T>> GetInactiveAsync(bool track = false)
-        {
-            return await GetAsync(a => !a.Active, track: track);
-        }
-
-        public virtual async Task<IEnumerable<T>> GetNotDeletedAsync(int page = 0, int qty = int.MaxValue, bool track = false)
-        {
-            return await GetAsync(a => !a.IsDeleted, page, qty, track);
-        }
-
-        public virtual async Task<T?> GetNotDeletedAsync(Guid id, bool track = false)
-        {
-            return await GetSingleOrDefaultAsync(a => a.Id == id && !a.IsDeleted, track);
-        }
-
         #endregion Get
 
         public virtual async Task<int> SaveAsync()

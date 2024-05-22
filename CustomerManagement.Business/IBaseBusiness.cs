@@ -94,15 +94,6 @@ namespace CustomerManagement.Business
         #region Update
 
         /// <summary>
-        /// Inactivate the record
-        /// </summary>
-        /// <param name="id"></param>
-        /// <param name="inactivatedBy"></param>
-        /// <remarks>Asynchronous</remarks>
-        /// <returns></returns>
-        Task<bool> InactivateAsync(Guid id, int? inactivatedBy);
-
-        /// <summary>
         /// Updates a single object based on the provided primary key and commits the change
         /// </summary>
         /// <remarks>Asynchronous</remarks>
