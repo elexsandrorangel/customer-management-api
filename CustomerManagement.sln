@@ -3,15 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.9.34723.18
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CustomerManagement", "CustomerManagement\CustomerManagement.csproj", "{AF961833-5373-4F70-B367-8B7F709CF6F6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CustomerManagement", "CustomerManagement\CustomerManagement.csproj", "{AF961833-5373-4F70-B367-8B7F709CF6F6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CustomerManagement.Business", "CustomerManagement.Business\CustomerManagement.Business.csproj", "{70B57CE6-CAB0-4DE0-BEC8-8E446378C946}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CustomerManagement.Business", "CustomerManagement.Business\CustomerManagement.Business.csproj", "{70B57CE6-CAB0-4DE0-BEC8-8E446378C946}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CustomerManagement.Models", "CustomerManagement.Models\CustomerManagement.Models.csproj", "{18A37F22-30F2-47C4-B2B8-212B335DD93B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CustomerManagement.Models", "CustomerManagement.Models\CustomerManagement.Models.csproj", "{18A37F22-30F2-47C4-B2B8-212B335DD93B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CustomerManagement.ViewModels", "CustomerManagement.ViewModels\CustomerManagement.ViewModels.csproj", "{DD7EE55C-B30E-4792-945D-E22F8502AAEC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CustomerManagement.ViewModels", "CustomerManagement.ViewModels\CustomerManagement.ViewModels.csproj", "{DD7EE55C-B30E-4792-945D-E22F8502AAEC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CustomerManagement.Repository", "CustomerManagement.Repository\CustomerManagement.Repository.csproj", "{7CDAD525-2C92-436B-9FCF-6E7794BF7079}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CustomerManagement.Repository", "CustomerManagement.Repository\CustomerManagement.Repository.csproj", "{7CDAD525-2C92-436B-9FCF-6E7794BF7079}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "01-Presentation", "01-Presentation", "{ED862882-5DB0-496D-B9EA-D13599C9D742}"
 EndProject
@@ -23,9 +23,17 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "04-Repository", "04-Reposit
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "05-Infra", "05-Infra", "{D310A6A8-8A47-4440-8038-0FF81D059589}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CustomerManagement.Infra.Core", "CustomerManagement.Infra.Core\CustomerManagement.Infra.Core.csproj", "{84332AD4-6E4B-4346-BE6E-6E2706B03ED9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CustomerManagement.Infra.Core", "CustomerManagement.Infra.Core\CustomerManagement.Infra.Core.csproj", "{84332AD4-6E4B-4346-BE6E-6E2706B03ED9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CustomerManagement.Infra.AutoMapper", "CustomerManagement.Infra.AutoMapper\CustomerManagement.Infra.AutoMapper.csproj", "{1C2D1870-27D8-49F4-8991-97EC69433794}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CustomerManagement.Infra.AutoMapper", "CustomerManagement.Infra.AutoMapper\CustomerManagement.Infra.AutoMapper.csproj", "{1C2D1870-27D8-49F4-8991-97EC69433794}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{E107CADD-4510-479E-88AC-9485330D26CF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CustomerManagement.Test", "CustomerManagement.Test\CustomerManagement.Test.csproj", "{5DD4B49C-6D59-40AE-AF8B-B7E1953F31B6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CustomerManagement.Business.Test", "CustomerManagement.Business.Test\CustomerManagement.Business.Test.csproj", "{31F3858C-CD5E-4429-ABA2-8673BB738D7E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CustomerManagement.Infra.Core.Test", "CustomerManagement.Infra.Core.Test\CustomerManagement.Infra.Core.Test.csproj", "{BEA8B3EC-A0A2-4E4C-8C19-949388385A8B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -61,6 +69,18 @@ Global
 		{1C2D1870-27D8-49F4-8991-97EC69433794}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1C2D1870-27D8-49F4-8991-97EC69433794}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1C2D1870-27D8-49F4-8991-97EC69433794}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5DD4B49C-6D59-40AE-AF8B-B7E1953F31B6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5DD4B49C-6D59-40AE-AF8B-B7E1953F31B6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5DD4B49C-6D59-40AE-AF8B-B7E1953F31B6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5DD4B49C-6D59-40AE-AF8B-B7E1953F31B6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{31F3858C-CD5E-4429-ABA2-8673BB738D7E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{31F3858C-CD5E-4429-ABA2-8673BB738D7E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{31F3858C-CD5E-4429-ABA2-8673BB738D7E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{31F3858C-CD5E-4429-ABA2-8673BB738D7E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BEA8B3EC-A0A2-4E4C-8C19-949388385A8B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BEA8B3EC-A0A2-4E4C-8C19-949388385A8B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BEA8B3EC-A0A2-4E4C-8C19-949388385A8B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BEA8B3EC-A0A2-4E4C-8C19-949388385A8B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -73,6 +93,9 @@ Global
 		{7CDAD525-2C92-436B-9FCF-6E7794BF7079} = {FEB357A3-80D1-423B-8718-9625D4775368}
 		{84332AD4-6E4B-4346-BE6E-6E2706B03ED9} = {D310A6A8-8A47-4440-8038-0FF81D059589}
 		{1C2D1870-27D8-49F4-8991-97EC69433794} = {D310A6A8-8A47-4440-8038-0FF81D059589}
+		{5DD4B49C-6D59-40AE-AF8B-B7E1953F31B6} = {E107CADD-4510-479E-88AC-9485330D26CF}
+		{31F3858C-CD5E-4429-ABA2-8673BB738D7E} = {E107CADD-4510-479E-88AC-9485330D26CF}
+		{BEA8B3EC-A0A2-4E4C-8C19-949388385A8B} = {E107CADD-4510-479E-88AC-9485330D26CF}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {F30BC953-E556-4658-B701-80114157B150}

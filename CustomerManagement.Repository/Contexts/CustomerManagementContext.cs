@@ -7,6 +7,7 @@ namespace CustomerManagement.Repository.Contexts
     public class CustomerManagementContext : DbContext
     {
         public DbSet<Customer> Customers { get; set; } = default!;
+        public DbSet<Phones> Phones { get; set; } = default!;
 
         public CustomerManagementContext(DbContextOptions<CustomerManagementContext> options)
             : base(options) 

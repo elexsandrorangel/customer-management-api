@@ -71,7 +71,7 @@ namespace CustomerManagement.Business
 
         public virtual async Task<TModel> AddAsync(TModel t)
         {
-            ValidateInsert(t);
+            await ValidateInsert(t);
             return ModelFromEntity(await Repository.AddAsync(EntityFromModel(t)))!;
         }
 
@@ -79,7 +79,7 @@ namespace CustomerManagement.Business
         {
             var list = tList;
 
-            ValidateInsert(tList);
+            await ValidateInsert(tList);
             return ModelFromEntity(await Repository.AddAsync(EntityFromModel(list)))!;
         }
 
@@ -98,12 +98,8 @@ namespace CustomerManagement.Business
 
         public virtual async Task DeleteAsync(Guid id)
         {
-            var data = await GetAsync(id, true);
+            var data = await GetAsync(id, true) ?? throw new AppNotFoundException();
 
-            if (data == null)
-            {
-                throw new AppNotFoundException();
-            }
             await DeleteAsync(data);
         }
 
@@ -142,11 +138,7 @@ namespace CustomerManagement.Business
 
         public virtual async Task<TModel> SaveOrUpdateAsync(TModel t)
         {
-            if (t == null)
-            {
-                throw new ArgumentNullException(nameof(t));
-            }
-            return await SaveEntityAsync(t);
+            return t == null ? throw new ArgumentNullException(nameof(t)) : await SaveEntityAsync(t);
         }
 
         private async Task<TModel> SaveEntityAsync(TModel t)
@@ -160,14 +152,14 @@ namespace CustomerManagement.Business
 
         public virtual async Task<TModel> UpdateAsync(TModel updated)
         {
+            if (updated == null)
+            {
+                throw new ArgumentNullException(nameof (updated));
+            }
+
             await ValidateUpdateAsync(updated);
 
-            TModel? record = await GetAsync(updated.Id, false);
-
-            if (record == null)
-            {
-                throw new AppNotFoundException();
-            }
+            TModel? record = await GetAsync(updated.Id, false) ?? throw new AppNotFoundException();
 
             updated.CreatedAt = record.CreatedAt;
 
@@ -177,14 +169,14 @@ namespace CustomerManagement.Business
 
         public virtual async Task<TModel> UpdateAsync(TModel updated, Guid key)
         {
+            if (updated == null)
+            {
+                throw new ArgumentNullException(nameof(updated));
+            }
+
             await ValidateUpdateAsync(updated);
 
-            TModel? record = await GetAsync(key, true);
-
-            if (record == null)
-            {
-                throw new AppNotFoundException();
-            }
+            TModel? record = await GetAsync(key, true) ?? throw new AppNotFoundException();
 
             updated.Id = key;
             updated.CreatedAt = record.CreatedAt;
@@ -202,18 +194,18 @@ namespace CustomerManagement.Business
         /// </summary>
         /// <param name="model">Model to insert</param>
         /// <exception cref="AppException">Business exception</exception>
-        protected abstract void ValidateInsert(TModel model);
+        protected abstract Task ValidateInsert(TModel model);
 
         /// <summary>
         /// Data validation before insert model into database
         /// </summary>
         /// <param name="models">Models to insert</param>
         /// <exception cref="AppException">Business exception</exception>
-        protected virtual void ValidateInsert(IEnumerable<TModel> models)
+        protected virtual async Task ValidateInsert(IEnumerable<TModel> models)
         {
             foreach (var item in models)
             {
-                ValidateInsert(item);
+                await ValidateInsert(item);
             }
         }
 
@@ -229,13 +221,9 @@ namespace CustomerManagement.Business
             {
                 throw new AppException();
             }
-            var record = await GetAsync(model.Id, false);
-            if (record == null)
-            {
-                throw new AppNotFoundException();
-            }
+            var _ = await GetAsync(model.Id, false) ?? throw new AppNotFoundException();
 
-            ValidateInsert(model);
+            await ValidateInsert(model);
         }
 
         /// <summary>
@@ -255,23 +243,14 @@ namespace CustomerManagement.Business
             {
                 throw new AppException();
             }
-            var record = await GetAsync(model.Id, false);
-            if (record == null)
-            {
-                throw new AppNotFoundException();
-            }
+            var _ = await GetAsync(model.Id, false) ?? throw new AppNotFoundException();
         }
 
         protected async Task<TEntity> GetEntityOrThrowAsync(TModel model)
         {
             var data = await Repository.GetAsync(model.Id, false);
 
-            if (data == null)
-            {
-                throw new AppNotFoundException();
-            }
-
-            return data;
+            return data == null ? throw new AppNotFoundException() : data!;
         }
 
         #endregion Validations

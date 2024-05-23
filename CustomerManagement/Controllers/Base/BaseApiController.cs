@@ -1,7 +1,6 @@
 ﻿using CustomerManagement.Business;
 using CustomerManagement.Models;
 using CustomerManagement.ViewModels;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CustomerManagement.Controllers.Base
@@ -52,7 +51,6 @@ namespace CustomerManagement.Controllers.Base
         [Route("{id:int?}/page/{page:int}/items/{qty:int}")]
         [ProducesResponseType(typeof(IEnumerable<BaseViewModel>), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ResultViewModel), StatusCodes.Status400BadRequest)]
-        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [Produces("application/json")]
         public virtual async Task<IActionResult> Get(Guid? id = null, int page = 0, int qty = int.MaxValue)
@@ -89,7 +87,6 @@ namespace CustomerManagement.Controllers.Base
         [Route("")]
         [ProducesResponseType(typeof(BaseViewModel), StatusCodes.Status201Created)]
         [ProducesResponseType(typeof(ResultViewModel), StatusCodes.Status400BadRequest)]
-        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [Produces("application/json")]
         public virtual async Task<IActionResult> CreateAsync([FromBody] TModel model)
@@ -100,6 +97,11 @@ namespace CustomerManagement.Controllers.Base
             }
 
             TModel data = await Business.AddAsync(model);
+            
+            if (data == null)
+            {
+                return BadRequest();
+            }
 
             string url = $"{Request.Scheme}://{Request.Host}{Request.Path}/{data.Id}";
             return Created(url, data);
@@ -119,7 +121,6 @@ namespace CustomerManagement.Controllers.Base
         [Route("{id:guid}")]
         [ProducesResponseType(typeof(BaseViewModel), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ResultViewModel), StatusCodes.Status400BadRequest)]
-        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [Produces("application/json")]
@@ -135,14 +136,14 @@ namespace CustomerManagement.Controllers.Base
                 return BadRequest(ModelState);
             }
 
-            TModel data = await Business.UpdateAsync(model);
+            TModel? data = await Business.UpdateAsync(model);
 
             if (data == null)
             {
                 return NotFound();
             }
 
-            return Ok(data);
+            return Ok(data!);
         }
 
         /// <summary>
@@ -158,7 +159,6 @@ namespace CustomerManagement.Controllers.Base
         [Route("{id:guid}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(typeof(ResultViewModel), StatusCodes.Status400BadRequest)]
-        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [Produces("application/json")]

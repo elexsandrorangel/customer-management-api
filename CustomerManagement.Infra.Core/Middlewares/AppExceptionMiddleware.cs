@@ -79,13 +79,14 @@ namespace CustomerManagement.Infra.Core.Middlewares
                     exceptionType = e7.ExceptionType;
                     statusCode = HttpStatusCode.UnprocessableEntity;
                     break;
-
-                case AppException e:
-                    exceptionType = e.ExceptionType;
+                case ArgumentNullException:
+                case ArgumentException:
+                case InvalidOperationException: 
+                case AppException:
                     statusCode = HttpStatusCode.BadRequest;
                     break;
 
-                case NotImplementedException _:
+                case NotImplementedException:
                     errorMessage = "Resource not implemented";
                     statusCode = HttpStatusCode.NotImplemented;
                     break;
