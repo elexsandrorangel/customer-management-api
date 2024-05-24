@@ -46,4 +46,4 @@ Após iniciar a depuração, uma nova janela do navegador será aberta com a doc
 
 [<img src="https://run.pstmn.io/button.svg" alt="Run In Postman" style="width: 128px; height: 32px;">](https://god.gw.postman.com/run-collection/11264835-c2cf8248-de4c-486d-bc79-e93b045eabd5?action=collection%2Ffork&source=rip_markdown&collection-url=entityId%3D11264835-c2cf8248-de4c-486d-bc79-e93b045eabd5%26entityType%3Dcollection%26workspaceId%3Dbf15e266-2224-46d2-a7a9-3fafc1bc1a17)
 
-**P.S.:**: O arquivo da collection do Postman também está disponível neste projeto para execução local.
+**P.S.:**: O arquivo **CustomerManagementCrud.postman_collection.json** do Postman também está disponível neste projeto para execução local.
