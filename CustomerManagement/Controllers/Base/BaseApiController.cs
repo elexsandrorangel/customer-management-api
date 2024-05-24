@@ -107,44 +107,44 @@ namespace CustomerManagement.Controllers.Base
             return Created(url, data);
         }
 
-        /// <summary>
-        /// Update the specified record
-        /// </summary>
-        /// <param name="id">Record identifier</param>
-        /// <param name="model">Record data</param>
-        /// <response code="200">Request successfull</response>
-        /// <response code="400">Request has missing/invalid values</response>
-        /// <response code="404">Record not found</response>
-        /// <response code="500">Oops! An error occurred</response>
-        /// <returns></returns>
-        [HttpPut]
-        [Route("{id:guid}")]
-        [ProducesResponseType(typeof(BaseViewModel), StatusCodes.Status200OK)]
-        [ProducesResponseType(typeof(ResultViewModel), StatusCodes.Status400BadRequest)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
-        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        [Produces("application/json")]
-        public virtual async Task<IActionResult> Edit(Guid id, [FromBody] TModel model)
-        {
-            if (model == null)
-            {
-                return BadRequest();
-            }
+        ///// <summary>
+        ///// Update the specified record
+        ///// </summary>
+        ///// <param name="id">Record identifier</param>
+        ///// <param name="model">Record data</param>
+        ///// <response code="200">Request successfull</response>
+        ///// <response code="400">Request has missing/invalid values</response>
+        ///// <response code="404">Record not found</response>
+        ///// <response code="500">Oops! An error occurred</response>
+        ///// <returns></returns>
+        //[HttpPut]
+        //[Route("{id:guid}")]
+        //[ProducesResponseType(typeof(BaseViewModel), StatusCodes.Status200OK)]
+        //[ProducesResponseType(typeof(ResultViewModel), StatusCodes.Status400BadRequest)]
+        //[ProducesResponseType(StatusCodes.Status404NotFound)]
+        //[ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        //[Produces("application/json")]
+        //public virtual async Task<IActionResult> Edit(Guid id, [FromBody] TModel model)
+        //{
+        //    if (model == null)
+        //    {
+        //        return BadRequest();
+        //    }
 
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
+        //    if (!ModelState.IsValid)
+        //    {
+        //        return BadRequest(ModelState);
+        //    }
 
-            TModel? data = await Business.UpdateAsync(model);
+        //    TModel? data = await Business.UpdateAsync(model);
 
-            if (data == null)
-            {
-                return NotFound();
-            }
+        //    if (data == null)
+        //    {
+        //        return NotFound();
+        //    }
 
-            return Ok(data!);
-        }
+        //    return Ok(data!);
+        //}
 
         /// <summary>
         /// Remove the record from database

@@ -16,6 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\CustomerManagement.Infra.Core\CustomerManagement.Infra.Core.csproj" />
     <ProjectReference Include="..\CustomerManagement.Models\CustomerManagement.Models.csproj" />
   </ItemGroup>
 

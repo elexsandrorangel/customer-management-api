@@ -1,0 +1,209 @@
+{
+	"info": {
+		"_postman_id": "c2cf8248-de4c-486d-bc79-e93b045eabd5",
+		"name": "CustomerManagementCrud",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "11264835",
+		"_collection_link": "https://www.postman.com/elexsandrors/workspace/elexsandro-s-public-collection/collection/11264835-c2cf8248-de4c-486d-bc79-e93b045eabd5?action=share&source=collection_link&creator=11264835"
+	},
+	"item": [
+		{
+			"name": "Create Customer",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": \"John Doe\",\r\n  \"email\": \"user1@example.com\",\r\n  \"phoneNumbers\": [\r\n    {\r\n      \"ddd\": \"41\",\r\n      \"phoneNumber\": \"123456-789\",\r\n      \"phoneType\": 1\r\n    },\r\n    {\r\n      \"ddd\": \"(41)\",\r\n      \"phoneNumber\": \"23456789\",\r\n      \"phoneType\": 0\r\n    }\r\n  ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:7006/api/Customers",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7006",
+					"path": [
+						"api",
+						"Customers"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Email and Phone",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"email\": \"user1-edit@example.com\",\r\n  \"phoneNumbers\": [\r\n        {\r\n            \"ddd\": \"42\",\r\n            \"phoneNumber\": \"123456789\",\r\n            \"phoneType\": 1,\r\n            \"id\": \"48e22a16-dcf2-4e19-f935-08dc7b5a14e4\"\r\n        },\r\n        {\r\n            \"ddd\": \"43\",\r\n            \"phoneNumber\": \"23456789\",\r\n            \"phoneType\": 1\r\n        }\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:7006/api/Customers/73d9a9a9-a8f3-498d-96d8-08dc7b5a14cd",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7006",
+					"path": [
+						"api",
+						"Customers",
+						"73d9a9a9-a8f3-498d-96d8-08dc7b5a14cd"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Email",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"email\": \"user1-edit@example.com\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:7006/api/Customers/73d9a9a9-a8f3-498d-96d8-08dc7b5a14cd",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7006",
+					"path": [
+						"api",
+						"Customers",
+						"73d9a9a9-a8f3-498d-96d8-08dc7b5a14cd"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Customer By Email",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:7006/api/Customers/email/user1@example.com",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7006",
+					"path": [
+						"api",
+						"Customers",
+						"email",
+						"user1@example.com"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Customer Phone",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:7006/api/Customers/73d9a9a9-a8f3-498d-96d8-08dc7b5a14cd/phone/6afa4777-030d-4229-ab3d-08dc7ba5bbde",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7006",
+					"path": [
+						"api",
+						"Customers",
+						"73d9a9a9-a8f3-498d-96d8-08dc7b5a14cd",
+						"phone",
+						"6afa4777-030d-4229-ab3d-08dc7ba5bbde"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Customers",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:7006/api/Customers",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7006",
+					"path": [
+						"api",
+						"Customers"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get By Phone",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:7006/api/Customers/phone/4123456789",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7006",
+					"path": [
+						"api",
+						"Customers",
+						"phone",
+						"4123456789"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get By Email",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:7006/api/Customers/email/user1@example.com",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7006",
+					"path": [
+						"api",
+						"Customers",
+						"email",
+						"user1@example.com"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

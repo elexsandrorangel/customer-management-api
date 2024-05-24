@@ -60,6 +60,17 @@ builder.Services.AddScoped<ICustomerRepository, CustomerRepository>();
 
 var app = builder.Build();
 
+#region Database Migrations
+
+using (var scope = app.Services.CreateScope())
+{
+    var dbContext = scope.ServiceProvider.GetRequiredService<CustomerManagementContext>();
+
+    dbContext.Database.Migrate();
+}
+
+#endregion Database Migration
+
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {

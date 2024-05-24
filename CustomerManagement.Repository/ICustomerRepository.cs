@@ -8,5 +8,7 @@ namespace CustomerManagement.Repository
 
         Task<Customer?> GetCustomerByEmailAsync(string email);
         Task<bool> IsEmailRegiseredToAnotherUserAsync(Guid id, string email);
+
+        Task DeletePhoneAsync(Guid customerId, Guid phoneId);
     }
 }

@@ -10,5 +10,11 @@ namespace CustomerManagement.Business
         Task<CustomerViewModel?> GetCustomerByEmailAsync(string email);
 
         Task DeleteCustomerByEmailAsync(string email);
+
+        Task<CustomerViewModel?> UpdatePhoneAndEmailAsync(Guid id, CustomerUpdateViewModel model);
+
+        CustomerViewModel ClearPhoneNumbers(CustomerViewModel model);
+
+        Task DeletePhoneAsync(Guid customerId, Guid phoneId);
     }
 }

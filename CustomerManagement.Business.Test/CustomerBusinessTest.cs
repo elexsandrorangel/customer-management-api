@@ -23,7 +23,7 @@ namespace CustomerManagement.Business.Test
             _customerBusiness = new CustomerBusiness(_repositoryMock.Object, _mapperMock.Object, _loggerMock.Object);
         }
 
-        #region 
+        #region Get
 
         [Fact]
         public async Task CustomerBusiness_Get_Customer_ThrowArgumentException_When_Email_Is_Empty()
@@ -103,7 +103,7 @@ namespace CustomerManagement.Business.Test
             Assert.Equal(2, result.FirstOrDefault()!.PhoneNumbers.Count);
         }
 
-        #endregion
+        #endregion Get
 
         #region
 
@@ -130,6 +130,65 @@ namespace CustomerManagement.Business.Test
             await Assert.ThrowsAsync<AppNotFoundException>(() => _customerBusiness.DeleteCustomerByEmailAsync(email));
         }
 
+        [Fact]
+        public void CustomerBusiness_ClearPhones_Should_ThrowArgumentNullException_When_CustomerIsNull()
+        {
+            Assert.Throws<ArgumentNullException>(() => _customerBusiness.ClearPhoneNumbers(null));
+        }
+
+        [Fact]
+        public void CustomerBusiness_ClearPhones_Should_ThrowArgumentNullException_When_Phone_Or_DDD_IsNull()
+        {
+            var model = new CustomerViewModel
+            {
+                PhoneNumbers = new List<PhoneViewModel>
+                {
+                    new PhoneViewModel { DDD = null, PhoneNumber = "3-456-7890" },
+                    new PhoneViewModel { DDD = "0(41)", PhoneNumber = "3456-7890" }
+                }
+            };
+
+            var model1 = new CustomerViewModel
+            {
+                PhoneNumbers = new List<PhoneViewModel>
+                {
+                    new PhoneViewModel { DDD = "55", PhoneNumber = "3-456-7890" },
+                    new PhoneViewModel { DDD = "0(41)", PhoneNumber = null }
+                }
+            };
+
+            Assert.Throws<ArgumentNullException>(() => _customerBusiness.ClearPhoneNumbers(model));
+            Assert.Throws<ArgumentNullException>(() => _customerBusiness.ClearPhoneNumbers(model1));
+        }
+
+        [Fact]
+        public void CustomerBusiness_ClearPhones_Should_Clear_Phones_Successfull()
+        {
+            var model = new CustomerViewModel
+            {
+                PhoneNumbers = new List<PhoneViewModel>
+                {
+                    new PhoneViewModel { DDD = "(51)", PhoneNumber = "3-456-7890" },
+                    new PhoneViewModel { DDD = "0(41)", PhoneNumber = "3456-7890" }
+                }
+            };
+            
+            var result = _customerBusiness.ClearPhoneNumbers(model);
+
+            Assert.NotNull(result);
+            Assert.True(result.PhoneNumbers.Any());
+            Assert.Equal(2, result.PhoneNumbers.Count);
+
+            var phone1 = result.PhoneNumbers.First();
+            var phone2 = result.PhoneNumbers.ElementAt(1);
+
+            Assert.Equal("51", phone1.DDD);
+            Assert.Equal("34567890", phone1.PhoneNumber);
+
+            Assert.Equal("41", phone2.DDD);
+            Assert.Equal("34567890", phone2.PhoneNumber);
+
+        }
         #endregion
     }
 }
